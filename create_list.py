@@ -18,10 +18,15 @@ def create_clean_list(user_url):
     file_name = get_user_name(user_url)
     clean_list = create_new_file(file_name)
     phrase = "Foto do perfil de "
+    phrase2 = "'s profile picture"
+
 
     for line in raw_lines:
         if(phrase in line):
             clean_list.write(line[len(phrase):])
+        if(phrase2 in line):
+            clean_list.write(f'{line[0:len(line)-len(phrase)-1]}\n')
+
 
     clean_list.close()
     raw.close()
