@@ -26,7 +26,7 @@ def click_followers():
 
 # rola a barra para destravar a lista íe volta para o incio
 def unlock_followers():
-    m.move(904,309, duration=2)
+    m.move(904,199, duration=2)
     mp.mouseDown()
     m.move(904,352, duration=2)
     mp.mouseUp()
@@ -40,20 +40,25 @@ def unlock_followers():
     m.move(904,422, duration=2)
     mp.mouseUp()
     mp.mouseDown()
-    m.move(904,309, duration=2)
+    m.move(904,199, duration=2)
     mp.mouseUp()
 
 #começa a pegar todo o texto
 def select_followers(five_seconds=1):
-    m.move(516,312, duration=1)
+    m.move(516,201, duration=1)
     mp.mouseDown()
     for i in range(five_seconds):
-        m.move(835,675, duration=2.5)
-        m.move(574,680, duration=2.5)
+        m.move(895,766, duration=2.5)
+        m.move(528,766, duration=2.5)
+    m.move(812,697, duration=2)
 
 if __name__ == "__main__":
 
     usuario = sys.argv[1]
+    tempo = int(sys.argv[2]) if len(sys.argv) > 1 else 500
+    tempo_impressao = format((5*tempo)/60, '.2f')
+
+    print(f"iniciando coleta em {usuario} com duracao de {tempo_impressao} minutos")
 
     user_name = get_user_name(usuario)
     print(user_name)
@@ -61,9 +66,11 @@ if __name__ == "__main__":
 
     click_followers()
     unlock_followers()
-    select_followers(300)
+    select_followers(tempo)
 
     lista_bruta = copy_clipboard()
     create_raw_list(lista_bruta)
 
     create_clean_list(usuario)
+
+    print("Coleta finalizada")

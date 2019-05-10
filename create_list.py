@@ -1,7 +1,10 @@
 import sys
 
-def get_user_name(url):
-    user_name = url[26:].rstrip('/')
+def get_user_name(name):
+    if ('https://www.instagram.com/' in name):
+        user_name = name[26:].rstrip('/')
+    else:
+        user_name = name
     return user_name
 
 def create_new_file(name):
@@ -14,10 +17,11 @@ def create_clean_list(user_url):
 
     file_name = get_user_name(user_url)
     clean_list = create_new_file(file_name)
+    phrase = "Foto do perfil de "
 
     for line in raw_lines:
-        if("Foto do perfil de " in line):
-            clean_list.write(line[18:])
+        if(phrase in line):
+            clean_list.write(line[len(phrase):])
 
     clean_list.close()
     raw.close()
@@ -26,6 +30,6 @@ def create_clean_list(user_url):
 
 if __name__ == "__main__":
     
-    nome_arquivo = sys.argv[1]
+    nome_arquivo = get_user_name(sys.argv[1])
 
     create_clean_list(nome_arquivo)
