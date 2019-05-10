@@ -21,8 +21,9 @@ def copy_clipboard():
 
 #clica nos seguidores
 def click_followers():
-    m.move(782,337, duration=1)
+    m.move(733,331, duration=1)
     mp.click()
+    time.sleep(10)
 
 # rola a barra para destravar a lista íe volta para o incio
 def unlock_followers():
@@ -69,6 +70,9 @@ if __name__ == "__main__":
     select_followers(tempo)
 
     lista_bruta = copy_clipboard()
+    time.sleep(2)
+    lista_bruta = copy_clipboard()
+    
     create_raw_list(lista_bruta)
 
     create_clean_list(usuario)
