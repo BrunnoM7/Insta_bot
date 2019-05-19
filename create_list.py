@@ -1,4 +1,15 @@
 import sys
+import os
+
+script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
+rel_path = "bases/seguidores/"
+abs_file_path = os.path.join(script_dir, rel_path)
+
+#cria lista bruta
+def create_raw_list(content):
+    file = open(abs_file_path+'raw_list', 'w')
+    file.write(content)
+    file.close()
 
 def get_user_name(name):
     if ('https://www.instagram.com/' in name):
@@ -8,11 +19,11 @@ def get_user_name(name):
     return user_name
 
 def create_new_file(name):
-    file = open(name, 'w+')
+    file = open(abs_file_path+name, 'w+')
     return file
 
 def create_clean_list(user_url):
-    raw = open('raw_list', 'r+')
+    raw = open(abs_file_path+'raw_list', 'r+')
     raw_lines = raw.readlines()
 
     file_name = get_user_name(user_url)

@@ -4,26 +4,21 @@ import pyperclip as cp
 import sys
 import time
 
-from create_list import create_clean_list, get_user_name
+from create_list import create_clean_list, get_user_name, create_raw_list
 from searcher import busca_usuario
-
-#cria lista bruta
-def create_raw_list(content):
-    file = open('raw_list', 'w')
-    file.write(content)
-    file.close()
 
 #copia texto selecionado para código
 def copy_clipboard():
     mp.hotkey('ctrl', 'c')
-    time.sleep(.01)
+    time.sleep(.5)
     return cp.paste()
 
 #clica nos seguidores
 def click_followers():
     m.move(733,331, duration=1)
+    time.sleep(4)    
     mp.click()
-    time.sleep(10)
+    time.sleep(60)
 
 # rola a barra para destravar a lista íe volta para o incio
 def unlock_followers():
@@ -59,7 +54,7 @@ if __name__ == "__main__":
     tempo = int(sys.argv[2]) if len(sys.argv) > 1 else 500
     tempo_impressao = format((5*tempo)/60, '.2f')
 
-    print(f"iniciando coleta em {usuario} com duracao de {tempo_impressao} minutos")
+    print(f"Iniciando coleta em {usuario} com duração aproximada de {tempo_impressao} minutos.")
 
     user_name = get_user_name(usuario)
     print(user_name)
@@ -67,6 +62,7 @@ if __name__ == "__main__":
 
     click_followers()
     unlock_followers()
+    time.sleep(2)
     select_followers(tempo)
 
     lista_bruta = copy_clipboard()
