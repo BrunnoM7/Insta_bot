@@ -1,13 +1,14 @@
 import sys
 import os
 
-script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
-rel_path = "bases/seguidores/"
-abs_file_path = os.path.join(script_dir, rel_path)
+def define_path(rel_path):
+    script_dir = os.path.dirname(__file__) 
+    abs_file_path = os.path.join(script_dir, rel_path)
+    return abs_file_path
 
 #cria lista bruta
-def create_raw_list(content):
-    file = open(abs_file_path+'raw_list', 'w')
+def create_raw_list(path, content):
+    file = open(path+'raw_list', 'w')
     file.write(content)
     file.close()
 
@@ -18,16 +19,16 @@ def get_user_name(name):
         user_name = name
     return user_name
 
-def create_new_file(name):
-    file = open(abs_file_path+name, 'w+')
+def create_new_file(path, name):
+    file = open(path+name, 'w+')
     return file
 
-def create_clean_list(user_url):
-    raw = open(abs_file_path+'raw_list', 'r+')
+def create_clean_list(path, user_url):
+    raw = open(path+'raw_list', 'r+')
     raw_lines = raw.readlines()
 
     file_name = get_user_name(user_url)
-    clean_list = create_new_file(file_name)
+    clean_list = create_new_file(path, file_name)
     phrase = "Foto do perfil de "
     phrase2 = "'s profile picture"
 
@@ -43,6 +44,7 @@ def create_clean_list(user_url):
     raw.close()
 
     return file_name
+
 
 if __name__ == "__main__":
     

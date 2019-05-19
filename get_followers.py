@@ -4,7 +4,7 @@ import pyperclip as cp
 import sys
 import time
 
-from create_list import create_clean_list, get_user_name, create_raw_list
+from create_list import create_clean_list, get_user_name, create_raw_list, define_path
 from searcher import busca_usuario
 
 #copia texto selecionado para código
@@ -50,6 +50,9 @@ def select_followers(five_seconds=1):
 
 if __name__ == "__main__":
 
+    rel_path = "bases/seguidores/"
+    path = define_path(rel_path)
+
     usuario = sys.argv[1]
     tempo = int(sys.argv[2]) if len(sys.argv) > 1 else 500
     tempo_impressao = format((5*tempo)/60, '.2f')
@@ -69,8 +72,8 @@ if __name__ == "__main__":
     time.sleep(2)
     lista_bruta = copy_clipboard()
     
-    create_raw_list(lista_bruta)
+    create_raw_list(path, lista_bruta)
 
-    create_clean_list(usuario)
+    create_clean_list(path, usuario)
 
     print("Coleta finalizada")
