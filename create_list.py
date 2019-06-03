@@ -49,5 +49,6 @@ def create_clean_list(path, user_url):
 if __name__ == "__main__":
     
     nome_arquivo = get_user_name(sys.argv[1])
+    path = define_path('bases/seguidores/')
 
-    create_clean_list(nome_arquivo)
+    create_clean_list(path,nome_arquivo)
