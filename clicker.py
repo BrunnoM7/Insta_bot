@@ -60,7 +60,12 @@ if __name__ == "__main__":
     db_file = open(sys.argv[1], 'r')
     lines = db_file.readlines()
 
+    counter = 0
     for line in lines:
         user = line.rstrip()
-        s.busca_usuario(user)
+        if(counter % 10 == 0):
+            s.busca_usuario_browser(user)
+        else:
+            s.busca_usuario(user)
         curte_fotos()
+        counter+= 1
